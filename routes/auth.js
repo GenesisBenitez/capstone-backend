@@ -5,7 +5,7 @@ const db = require("../mysql/dbConfig");
 
 router.get("/getLoggedInUser", (request,response)=>{
     if(request.session.loggedIn){
-        response.send({username: request.session.username, userId: request.session.userId, loggedIn: request.session.loggedIn})
+        response.send({username: request.session.username, userId: request.session.userId, loggedIn: request.session.loggedIn, avatar: request.session.avatar})
     }else{
         request.session.loggedIn = false;
         response.send({loggedIn: request.session.loggedIn});
@@ -25,11 +25,13 @@ router.post("/login", (request,response)=>{
             console.log(results[0]);
             if(results != undefined){
                 request.session.userId = results[0].id; 
+                request.session.avatar = results[0].avatar; 
             }            
             response.end("User Successfully logged in!");
          }else{
             response.session.loggedIn = false;
             response.send({loggedIn: request.session.loggedIn});
+
             }
         })
     }

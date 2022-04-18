@@ -8,6 +8,8 @@ const session = require('express-session');
 const countryRoutes = require("./routes/countryRoutes");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/userRoutes");
+const languageRoutes = require("./routes/languageRoutes");
+const bookRoutes = require("./routes/bookRoutes");
 
 const app = express();
 const port = 8080;
@@ -30,6 +32,8 @@ app.use(bodyParser.json());
 app.use("/", authRoutes);
 app.use("/countries", countryRoutes);
 app.use("/users", userRoutes);
+app.use("/languages", languageRoutes);
+app.use("/books", bookRoutes);
 
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`)
