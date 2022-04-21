@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require("../mysql/dbConfig");
 
 router.get("/getAllLanguages", (request,response)=>{
-    db.query("select * from languages", (err, results)=>{
+    db.query("select * from languages order by name asc", (err, results)=>{
         if(err) throw err;
         response.send(results);
     })

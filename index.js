@@ -10,6 +10,8 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/userRoutes");
 const languageRoutes = require("./routes/languageRoutes");
 const bookRoutes = require("./routes/bookRoutes");
+const authorRoutes = require("./routes/authorRoutes");
+const bookCommentRoutes = require("./routes/bookCommentRoutes");
 
 const app = express();
 const port = 8080;
@@ -34,6 +36,8 @@ app.use("/countries", countryRoutes);
 app.use("/users", userRoutes);
 app.use("/languages", languageRoutes);
 app.use("/books", bookRoutes);
+app.use("/authors", authorRoutes);
+app.use("/bookComments", bookCommentRoutes);
 
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`)

@@ -18,14 +18,27 @@ router.get("/getBook/:id", (request,response)=>{
 });
 
 router.get("/getAllBookInfo", (request,response)=>{
-    db.query(`select books.title, books.description, books.release_year,books.cover,
-languages.name AS language, authors.first_name, authors.last_name, countries.name AS country_name,
+    db.query(`select books.id, books.title, books.description, books.release_year,books.cover,
+languages.name AS language, authors.first_name, authors.last_name, countries.id AS country_id, countries.name AS country_name,
 countries.flag, users.id AS userId, users.username
     from books
     inner join languages on books.language_id = languages.id 
     inner join authors on books.author_id = authors.id
     inner join countries on books.country_id = countries.id
     inner join users on books.user_id = users.id `, (err, results)=>{
+        if(err) throw err;
+        response.send(results);
+    })
+})
+router.get("/getAllBookInfoById/:id", (request,response)=>{
+    db.query(`select books.id, books.title, books.description, books.release_year,books.cover,
+languages.name AS language, authors.first_name, authors.last_name, countries.id AS country_id, countries.name AS country_name,
+countries.flag, users.id AS userId, users.username
+    from books
+    inner join languages on books.language_id = languages.id 
+    inner join authors on books.author_id = authors.id
+    inner join countries on books.country_id = countries.id 
+    inner join users on books.user_id = users.id where books.id = ?`,[request.params.id], (err, results)=>{
         if(err) throw err;
         response.send(results);
     })
@@ -37,4 +50,5 @@ router.post("/addBook", (request,response)=>{
         response.send("Country successfully added");
     })
 });
+
 module.exports = router;
