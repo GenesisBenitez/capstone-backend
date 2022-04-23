@@ -132,7 +132,7 @@ create table history_comments(
 -- insert statements
 insert into countries(name, flag, language_id, capital)values('The United States of America', 'https://miro.medium.com/max/1200/0*o0-6o1W1DKmI5LbX.png', 1, 'Washington DC');
 insert into languages(name)values('English');
-insert into users(first_name, last_name, country_id, username, password,admin)values('Genesis', 'Benitez', 1, 'genesis', 'genesis', 'Y');
+insert into users(first_name, last_name, country_id, username, password,admin,bio,avatar,email)values('Jim', 'Jones', 1, 'jim', 'jim', 'N','A simple man that loves history', 'https://cdn-icons.flaticon.com/png/512/1785/premium/1785911.png?token=exp=1650668325~hmac=694362273e031a750e7347b964f20ca3','jimjones123@hotmail.com');
 insert into books(title,description,release_year,language_id,author_id,user_id,country_id,cover)values('El Cipitío', 'Based on a Nahuatl legend that for centuries has been passed down from generation to generation in the countryside of El Salvador, this tale compiles many of the adventures of a magical little elf who moves among flowers, rivers and jungle animals, befriending children who play away from their parents. This edition was magnificently illustrated by Vicky Ramos, a Costa Rican artist of enlightened sensitivity.', 2006,3,1,1,2,'https://images-na.ssl-images-amazon.com/images/I/519JY2FFkxL._SX340_BO1,204,203,200_.jpg');
 
 
