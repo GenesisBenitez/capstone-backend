@@ -19,21 +19,27 @@ router.get("/getUser/:id", (request,response)=>{
 router.get("/getUserInfo/:id", (request,response)=>{
     db.query(`select users.id, users.first_name, users.last_name, users.admin,
     users.avatar, users.bio, users.email, users.created_at, users.username,
-    countries.name AS country_name, countries.flag
+    countries.name AS country_name, countries.flag,
+    COUNT(books.id) as books_posted_count,
+    COUNT(films.id) as films_posted_count,
+    COUNT(history.id) as history_posted_count
     from users
     inner join countries on users.country_id = countries.id
+    left join books on users.id = books.user_id
+    left join films on users.id = films.user_id
+    left join history on users.id = history.user_id
     where users.id = ?`, [request.params.id], (err, results)=>{
         if(err) throw err``
         response.send(results);
     })
 });
-router.get("/getUserCountry/:id", (request,response)=>{
-    db.query(`select countries.name from 
-    users
-    inner join countries on users.country_id = countries.id
-    where countries.id = ?`, [request.params.id], (err, results)=>{
+
+router.put("/updateAvatar/:id", (request,response)=>{
+    db.query(`update users set avatar = ? where id = ?`, [request.body.avatar, request.params.id], (err, results)=>{
         if(err) throw err;
-        response.send(results);
+        request.session.avatar = request.body.avatar;
+        response.send("Avatar successfully updated");
     })
-});
+})
+
 module.exports = router;
