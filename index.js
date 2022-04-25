@@ -14,6 +14,8 @@ const authorRoutes = require("./routes/authorRoutes");
 const bookCommentRoutes = require("./routes/bookCommentRoutes");
 const filmRoutes = require("./routes/filmRoutes");
 const filmCommentRoutes = require("./routes/filmCommentRoutes");
+const bookLikesRoutes = require("./routes/bookLikesRoutes");
+
 
 const app = express();
 const port = 8080;
@@ -42,6 +44,8 @@ app.use("/authors", authorRoutes);
 app.use("/bookComments", bookCommentRoutes);
 app.use("/films", filmRoutes);
 app.use("/filmComments", filmCommentRoutes);
+app.use("/bookLikes", bookLikesRoutes);
+
 
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`)

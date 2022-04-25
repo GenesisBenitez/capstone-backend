@@ -91,7 +91,7 @@ create table film_likes(
     id int not null auto_increment,
     user_id int not null,
     film_id int not null,
-    likes int not null,
+    like int not null,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     primary key(id),
     foreign key(user_id) references users(id),
@@ -112,7 +112,7 @@ create table book_likes(
     id int not null auto_increment,
     user_id int not null,
     book_id int not null,
-    likes int not null,
+    book_like int not null,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     primary key(id),
     foreign key(user_id) references users(id),
@@ -128,6 +128,8 @@ create table history_comments(
     foreign key(user_id) references users(id),
     foreign key(history_id) references history(id)
 );
+
+
 
 -- insert statements
 insert into countries(name, flag, language_id, capital)values('The United States of America', 'https://miro.medium.com/max/1200/0*o0-6o1W1DKmI5LbX.png', 1, 'Washington DC');
