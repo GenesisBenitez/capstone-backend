@@ -15,6 +15,9 @@ const bookCommentRoutes = require("./routes/bookCommentRoutes");
 const filmRoutes = require("./routes/filmRoutes");
 const filmCommentRoutes = require("./routes/filmCommentRoutes");
 const bookLikesRoutes = require("./routes/bookLikesRoutes");
+const historyTopicRoutes = require("./routes/historyTopicRoutes");
+const historyTopicCommentRoutes = require("./routes/historyTopicCommentRoutes");
+const historyTopicLikesRoutes = require("./routes/historyTopicLikesRoutes");
 
 
 const app = express();
@@ -45,6 +48,9 @@ app.use("/bookComments", bookCommentRoutes);
 app.use("/films", filmRoutes);
 app.use("/filmComments", filmCommentRoutes);
 app.use("/bookLikes", bookLikesRoutes);
+app.use("/historyTopics", historyTopicRoutes);
+app.use("/historyTopicComments", historyTopicCommentRoutes);
+app.use("/historyTopicLikes", historyTopicLikesRoutes);
 
 
 app.listen(port, ()=> {

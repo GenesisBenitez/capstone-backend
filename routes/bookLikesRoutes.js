@@ -35,7 +35,7 @@ router.post("/addBookLike", (request, response)=>{
 })
 
 router.put("/updateBookLike/:id/:book_id", (request, response)=>{
-    db.query("update book_likes set book_like = ? where book_id = ?", [request.body.book_like, request.params.book_id], (err, results)=>{
+    db.query("update book_likes set book_like = ? where book_id = ? AND id = ?", [request.body.book_like, request.params.book_id, request.params.id], (err, results)=>{
         if(err) throw err;
         response.send("Book like successfully updated");
     })

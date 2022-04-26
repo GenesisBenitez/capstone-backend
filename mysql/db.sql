@@ -66,13 +66,13 @@ create table books(
     foreign key(country_id) references countries(id)
 );
 
-create table history(
+create table history_topics(
     id int not null auto_increment,
-    event_name varchar(200) not null,
+    name varchar(200) not null,
     description varchar(5000) not null,
-    year int not null,
     user_id int not null,
     country_id int not null,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     primary key(id),
     foreign key(user_id) references users(id),
     foreign key(country_id) references countries(id)
@@ -118,15 +118,25 @@ create table book_likes(
     foreign key(user_id) references users(id),
     foreign key(book_id) references books(id)
 );
-
-create table history_comments(
+create table history_topic_likes(
     id int not null auto_increment,
     user_id int not null,
-    history_id int not null,
+    history_topic_id int not null,
+    history_topic_like int not null,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    primary key(id),
+    foreign key(user_id) references users(id),
+    foreign key(history_topic_id) references history_topics(id)
+);
+
+create table history_topic_comments(
+    id int not null auto_increment,
+    user_id int not null,
+    history_topic_id int not null,
     comment varchar(2000) not null,
     primary key(id),
     foreign key(user_id) references users(id),
-    foreign key(history_id) references history(id)
+    foreign key(history_topic_id) references history_topics(id)
 );
 
 
