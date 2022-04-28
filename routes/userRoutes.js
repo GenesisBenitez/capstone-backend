@@ -22,14 +22,14 @@ router.get("/getUserInfo/:id", (request,response)=>{
     countries.name AS country_name, countries.flag,
     COUNT(books.id) as books_posted_count,
     COUNT(films.id) as films_posted_count,
-    COUNT(history.id) as history_posted_count
+    COUNT(history_topics.id) as history_posted_count
     from users
     inner join countries on users.country_id = countries.id
     left join books on users.id = books.user_id
     left join films on users.id = films.user_id
-    left join history on users.id = history.user_id
+    left join history_topics on users.id = history_topics.user_id
     where users.id = ?`, [request.params.id], (err, results)=>{
-        if(err) throw err``
+        if(err) throw err
         response.send(results);
     })
 });

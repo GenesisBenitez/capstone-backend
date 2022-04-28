@@ -20,11 +20,13 @@ router.get("/getFilm/:id", (request,response)=>{
 router.get("/getAllFilmInfo", (request,response)=>{
     db.query(`select films.id, films.title, films.description, films.release_year,films.poster,
 languages.name AS language, countries.id AS country_id, countries.name AS country_name,
-countries.flag, users.id AS userId, users.username
+countries.flag, users.id AS userId, users.username, IFNULL(SUM(film_likes.film_like),0) as total_likes
     from films
     inner join languages on films.language_id = languages.id 
     inner join countries on films.country_id = countries.id
-    inner join users on films.user_id = users.id `, (err, results)=>{
+    inner join users on films.user_id = users.id
+    left join film_likes ON films.id = film_likes.film_id
+    group by films.id `, (err, results)=>{
         if(err) throw err;
         response.send(results);
     })

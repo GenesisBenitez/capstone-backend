@@ -91,7 +91,7 @@ create table film_likes(
     id int not null auto_increment,
     user_id int not null,
     film_id int not null,
-    like int not null,
+    film_like int not null,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     primary key(id),
     foreign key(user_id) references users(id),
@@ -134,6 +134,7 @@ create table history_topic_comments(
     user_id int not null,
     history_topic_id int not null,
     comment varchar(2000) not null,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     primary key(id),
     foreign key(user_id) references users(id),
     foreign key(history_topic_id) references history_topics(id)
