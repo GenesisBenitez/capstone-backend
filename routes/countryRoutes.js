@@ -28,12 +28,14 @@ router.get("/getAllCountryInfoById/:id", (request,response)=>{
 })
 router.get("/getAllCountryInfo", (request,response)=>{
     db.query(`select countries.id, countries.name, countries.flag, countries.banner_img,languages.name AS language,
-    COUNT(books.id) as total_books, COUNT(films.id) as total_films
+    COUNT(distinct books.id) as total_books, COUNT(distinct films.id) as total_films, COUNT(distinct history_topics.id) as total_history_topics
     from countries
     inner join languages ON countries.language_id = languages.id
     left join books on countries.id = books.country_id
     left join films on countries.id = films.country_id
-    group by countries.id
+    left join history_topics on countries.id = history_topics.country_id
+    group by countries.id, books.country_id, films.country_id, history_topics.country_id
+    order by countries.name asc
 `, [request.params.id], (err, results)=>{
         if(err) throw err;
         response.send(results);
@@ -66,5 +68,6 @@ router.get("/getAllFilmsByCountryId/:id", (request,response)=>{
         response.send(results);
     })
 })
+
 
 module.exports = router;

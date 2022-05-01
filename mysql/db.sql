@@ -154,3 +154,13 @@ select countries.name, countries.capital, countries.flag,
 languages.name
 from countries
 inner join languages on countries.language_id = language_id
+
+--country detailed info
+select books.id,books.cover,
+count(distinct book_comments.id) as book_comments_count,
+count(distinct book_likes.id) as book_likes_count
+from books
+left join book_comments on book_comments.book_id = books.id
+left join book_likes on book_likes.book_id = books.id
+where books.country_id = 1
+group by books.id
