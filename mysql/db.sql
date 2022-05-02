@@ -164,3 +164,6 @@ left join book_comments on book_comments.book_id = books.id
 left join book_likes on book_likes.book_id = books.id
 where books.country_id = 1
 group by books.id
+
+
+SELECT * FROM history_topics WHERE CONCAT(name, '', description, '') LIKE "%Samba%"
